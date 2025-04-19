@@ -1,7 +1,7 @@
-class RadixSort {
+class Main {
 	public static void main(String [] args) {
 		int arr[] = {109, 108, 107, 106, 105, 104};
-		System.out.print(getDigit(109, 2));
+		System.out.print(getDigit(15945, 4));
 	}
 	
 	private static int getDigit(int num, int position) {
@@ -11,7 +11,8 @@ class RadixSort {
 			num /= 10;
 			position--;
 		}
-		if (num == 0 && position < 0) {
+		if (position >= 0) {
+			
 			return 0;
 		}
 		return lastDigit;
