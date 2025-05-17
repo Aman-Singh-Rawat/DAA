@@ -2,7 +2,14 @@ class MaxHeap {
 	public static void main(String [] args) {
 		int arr[] = {18, 20, 54, 7, 36, 25, 78};
 		int size = arr.length - 1;
-		heapfy(arr, size);
+		int temp;
+		while(size > 0) {
+			heapfy(arr, size);
+			temp = arr[0];
+			arr[0] = arr[size];
+			arr[size--] = temp;
+		}
+		printArray(arr);
 		
 	}
 	
@@ -13,7 +20,7 @@ class MaxHeap {
 		for (int i = size;  i >= 0; i--) {
 			rc = i * 2 + 2;
 			
-			if (rc >= size) continue;
+			if (rc > size) continue;
 			
 			if (arr[rc] > arr[rc - 1]) {
 				swappingIndex = rc;
@@ -27,8 +34,22 @@ class MaxHeap {
 				arr[swappingIndex] = temp;
 			}
 		}
-		
-		printArray(arr);
+		if (!isHeapfy(arr, size)) {
+			heapfy(arr, size);
+		}
+	}
+	
+	public static boolean isHeapfy(int [] arr, int size) {
+		int rc;
+		for (int i = 0; i < size; i++) {
+			rc = i * 2 + 2;
+			if (rc > size) continue;
+			
+			if (arr[i] < arr[rc] || arr[i] < arr[rc-1] ) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	private static void printArray(int [] array) {
